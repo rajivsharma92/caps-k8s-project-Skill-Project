@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: careerpath
+  namespace: saleproject
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: careerpath
+  template:
+    metadata:
+      labels:
+        app: careerpath
+    spec:
+      containers:
+        - name: careerpath
+          image: your-ecr-repo/careerpath:latest
+          ports:
+            - containerPort: 3003
+          env:
+            - name: MONGO_URI
+              value: "MY_MONGOURL"
+            - name: OPENAI_API_KEY
+              value: "MY_OPENAPI_KEY"
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
