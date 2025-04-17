@@ -1,23 +1,41 @@
+
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: saleproject-ingress
-  namespace: saleproject
-  annotations:
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
-    alb.ingress.kubernetes.io/backend-protocol: HTTP
-    kubernetes.io/ingress.class: alb
+  name: saleproject-ingress
+  namespace: saleproject
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  rules:
-    - host: frontend.saleproject.com  # You can replace this with your domain
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: frontend
-                port:
-                  number: 3000
+  rules:
+  - host: your-domain.com
+    http:
+      paths:
+      - path: /frontend
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend-service
+            port:
+              number: 3000
+      - path: /careerpath
+        pathType: Prefix
+        backend:
+          service:
+            name: careerpath-service
+            port:
+              number: 3003
+      - path: /prometheus
+        pathType: Prefix
+        backend:
+          service:
+            name: prometheus-service
+            port:
+              number: 9090
+      - path: /cadvisor
+        pathType: Prefix
+        backend:
+          service:
+            name: cadvisor-service
+            port:
+              number: 8080
