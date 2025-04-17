@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: careerpath-service
+  name: cadvisor-service
   namespace: saleproject
 spec:
   selector:
-    app: careerpath
+    app: cadvisor
   ports:
     - protocol: TCP
-      port: 3003
-      targetPort: 3003
+      port: 8080
+      targetPort: 8080
   type: ClusterIP

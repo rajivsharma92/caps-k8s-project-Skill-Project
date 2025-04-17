@@ -14,14 +14,15 @@ spec:
         app: prometheus
     spec:
       containers:
-        - name: prometheus
-          image: prom/prometheus:latest
-          args:
-            - "--config.file=/etc/prometheus/prometheus.yml"
-          volumeMounts:
-            - name: config-volume
-              mountPath: /etc/prometheus
+      - name: prometheus
+        image: prom/prometheus:latest
+        args:
+          - '--config.file=/etc/prometheus/prometheus.yml'
+        volumeMounts:
+          - name: prometheus-config
+            mountPath: /etc/prometheus
       volumes:
-        - name: config-volume
+        - name: prometheus-config
           configMap:
             name: prometheus-config
+

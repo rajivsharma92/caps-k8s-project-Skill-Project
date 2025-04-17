@@ -4,7 +4,7 @@ metadata:
   name: careerpath
   namespace: saleproject
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: careerpath
@@ -14,19 +14,19 @@ spec:
         app: careerpath
     spec:
       containers:
-        - name: careerpath
-          image: your-ecr-repo/careerpath:latest
-          ports:
-            - containerPort: 3003
-          env:
-            - name: MONGO_URI
-              value: "MY_MONGOURL"
-            - name: OPENAI_API_KEY
-              value: "MY_OPENAPI_KEY"
-          resources:
-            requests:
-              memory: "256Mi"
-              cpu: "250m"
-            limits:
-              memory: "512Mi"
-              cpu: "500m"
+      - name: careerpath
+        image: rajiv8982/saleproject-careerpath:v1
+        ports:
+        - containerPort: 3003
+        env:
+        - name: MONGO_URI
+          valueFrom:
+            secretKeyRef:
+              name: saleproject-secrets
+              key: MONGO_URI
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: saleproject-secrets
+              key: OPENAI_API_KEY
+
