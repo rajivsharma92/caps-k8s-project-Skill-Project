@@ -33,19 +33,9 @@ kubectl apply -f prometheus-service.yaml
 kubectl apply -f cadvisor-deployment.yaml
 kubectl apply -f cadvisor-service.yaml
 
-# 6. Port-forward services in background
-echo "🌐 Starting port-forwarding to localhost..."
+# 6. Apply ingress
+echo "🌐 Applying ingress resources..."
+kubectl apply -f ingress.yaml
 
-# Kill any existing port-forwards
-pkill -f "kubectl port-forward" || true
-
-kubectl port-forward svc/frontend-service 3000:3000 -n saleproject &
-kubectl port-forward svc/careerpath-service 3003:3003 -n saleproject &
-kubectl port-forward svc/prometheus-service 9090:9090 -n saleproject &
-kubectl port-forward svc/cadvisor-service 8080:8080 -n saleproject &
-
-echo "✅ All services are deployed and available at:"
-echo "🔹 Frontend:     http://localhost:3000"
-echo "🔹 Careerpath:   http://localhost:3003"
-echo "🔹 Prometheus:   http://localhost:9090"
-echo "🔹 cAdvisor:     http://localhost:8080"
+echo "✅ All services are deployed!"
+echo "🌍 Access your services via the configured ingress hostnames or URLs."

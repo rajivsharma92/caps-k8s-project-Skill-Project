@@ -1,0 +1,40 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: saleproject-ingress
+  namespace: saleproject
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: 3.238.108.148
+    http:
+      paths:
+      - path: /frontend
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend-service
+            port:
+              number: 3000
+      - path: /careerpath
+        pathType: Prefix
+        backend:
+          service:
+            name: careerpath-service
+            port:
+              number: 3003
+      - path: /prometheus
+        pathType: Prefix
+        backend:
+          service:
+            name: prometheus-service
+            port:
+              number: 9090
+      - path: /cadvisor
+        pathType: Prefix
+        backend:
+          service:
+            name: cadvisor-service
+            port:
+              number: 8080
