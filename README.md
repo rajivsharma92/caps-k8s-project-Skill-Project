@@ -1,10 +1,10 @@
-### End-to-End DevOps Pipeline for AWS EKS Deployment
+# End-to-End DevOps Pipeline for AWS EKS Deployment
 This project implements a fully automated CI/CD pipeline to provision AWS infrastructure using Terraform and deploy a containerized application (with monitoring via Prometheus) onto an AWS EKS cluster using Kubernetes. All deployments and cleanups are fully automated via three separate Jenkins pipelines.
-# Architecture Diagram
+### Architecture Diagram
 Below is the architecture diagram of the deployment:
 ![image](https://github.com/user-attachments/assets/4a35e05b-b069-4c4c-a903-3a92a25a0013)
 
-1. Overview
+## 1. Overview
 Project Components
 - Terraform Infrastructure Provisioning
 The infrastructure is provisioned using Terraform with Terraform state stored and backed up in an S3 bucket. This repository provisions the AWS EKS cluster, VPC, subnets, and IAM roles.
@@ -21,7 +21,7 @@ Three distinct Jenkins pipelines automate the complete workflow:
 - Kubernetes Deployment Pipeline: Clones the Kubernetes repository and executes the deployment script (deploy.sh), which deploys all the Kubernetes resources (including monitoring and ingress).
 - Cleanup Pipeline: Clones the Kubernetes repository and executes a cleanup script (cleanup.sh) that removes the deployed resources when needed.
 
-2. System Architecture & Repository Structure
+## 2. System Architecture & Repository Structure
 Repositories
 - Terraform Repository
 URL: https://github.com/rajivsharma92/terraform-caps-project.git
@@ -32,7 +32,7 @@ Role: Contains all Kubernetes manifests and the scripts folder with:
 - deploy.sh – Automates the deployment of the namespace, secrets, backend, frontend, monitoring components (Prometheus, cAdvisor), and ingress.
 - cleanup.sh – Automates the deletion of all deployed resources.
 
-3. Terraform Infrastructure Provisioning
+## 3. Terraform Infrastructure Provisioning
 Terraform provisions the AWS infrastructure required for the EKS cluster. The Terraform state is securely stored in an S3 bucket to ensure persistence and disaster recovery.
 Deployment Process (Managed via Jenkins)
 Jenkinsfile for Terraform Deployment
@@ -95,10 +95,10 @@ pipeline {
     }
 }
 
-
+
 This pipeline provisions the EKS cluster along with the necessary networking and IAM policies, ensuring that the Terraform state is backed up on S3.
 
-4. Kubernetes Deployment
+## 4. Kubernetes Deployment
 The Kubernetes deployment pipeline deploys all applications and monitoring components using a preconfigured script (deploy.sh) from the repository’s scripts folder.
 Deployment Process (Managed via Jenkins)
 Jenkinsfile for Kubernetes Deployment
@@ -138,7 +138,7 @@ pipeline {
     }
 }
 
-
+
 The deploy.sh script performs the following operations:
 - Namespace Creation: Applies namespace.yaml to create and set the default namespace (saleproject).
 - Secrets & Prometheus Config: Applies secret.yaml and prometheus-configmap.yaml for secure configuration and monitoring.
@@ -146,7 +146,7 @@ The deploy.sh script performs the following operations:
 - Monitoring Deployment: Deploys Prometheus and cAdvisor (for monitoring cluster health) along with ingress resources.
 - Verification: Prints deployed pods and services in the namespace.
 
-5. Cleanup Pipeline
+## 5. Cleanup Pipeline
 This pipeline provides an automated way to remove all deployed Kubernetes resources when needed.
 Cleanup Process (Managed via Jenkins)
 Jenkinsfile for Cleanup Deployment
@@ -186,10 +186,9 @@ pipeline {
     }
 }
 
-
 This pipeline clones the Kubernetes repository, runs the cleanup.sh script (which removes all deployed resources), and verifies that the namespace is cleared.
 
-6. Verification & Validation
+## 6. Verification & Validation
 After executing the pipelines, verify the deployment using:
 - AWS Infrastructure Verification:
 aws eks describe-cluster --name caps-eks-cluster
@@ -200,7 +199,7 @@ kubectl get svc -n saleproject
 
 Collect logs and screenshots from Jenkins console outputs as evidence of successful execution.
 
-7. Project Closure & Cleanup
+## 7. Project Closure & Cleanup
 When closing the project:
 - Run the Cleanup Pipeline:
 Use the third Jenkinsfile to execute the cleanup process and remove deployed Kubernetes resources.
@@ -214,7 +213,7 @@ Ensure no unwanted AWS resources remain active by reviewing your AWS billing das
 - Project Retrospective:
 Document lessons learned and recommendations for future improvements.
 
-8. Conclusion
+## 8. Conclusion
 This project demonstrates a robust, end-to-end automated pipeline using:
 - Terraform (with S3 state backup): For provisioning infrastructure on AWS.
 - Kubernetes: For deploying a fully containerized application with integrated monitoring (Prometheus and cAdvisor).
