@@ -213,6 +213,8 @@ Ensure no unwanted AWS resources remain active by reviewing your AWS billing das
 - Project Retrospective:
 Document lessons learned and recommendations for future improvements.
 
+### FOr deployment Images refer to [S3 backup terraform ].
+
 ## 8. Conclusion
 This project demonstrates a robust, end-to-end automated pipeline using:
 - Terraform (with S3 state backup): For provisioning infrastructure on AWS.
