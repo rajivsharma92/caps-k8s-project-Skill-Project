@@ -1,6 +1,6 @@
 ### End-to-End DevOps Pipeline for AWS EKS Deployment
 This project implements a fully automated CI/CD pipeline to provision AWS infrastructure using Terraform and deploy a containerized application (with monitoring via Prometheus) onto an AWS EKS cluster using Kubernetes. All deployments and cleanups are fully automated via three separate Jenkins pipelines.
-## Architecture Diagram
+# Architecture Diagram
 Below is the architecture diagram of the deployment:
 ![image](https://github.com/user-attachments/assets/4a35e05b-b069-4c4c-a903-3a92a25a0013)
 
