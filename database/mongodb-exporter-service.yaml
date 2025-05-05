@@ -9,4 +9,4 @@ spec:
   ports:
     - port: 9216
       targetPort: 9216
-  type: ClusterIP
+  type: LoadBalancer
