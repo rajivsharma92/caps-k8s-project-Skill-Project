@@ -30,8 +30,8 @@ kubectl apply -f frontend-service.yaml
 echo "Deploying Prometheus and cAdvisor..."
 kubectl apply -f prometheus-deployment.yaml
 kubectl apply -f prometheus-service.yaml
-kubectl apply -f cadvisor-deployment.yaml
-kubectl apply -f cadvisor-service.yaml
+# kubectl apply -f cadvisor-deployment.yaml
+# kubectl apply -f cadvisor-service.yaml
 
 # 6. Apply ingress
 echo "Applying ingress resources..."
