@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: careerpath
-        image: rajiv8982/saleproject-careerpath:v1
+        image: iammanjyyot/saleproject-careerpath:v1
         ports:
         - containerPort: 3003
         env:
